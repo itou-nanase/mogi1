@@ -1,0 +1,109 @@
+/* 全体を左右2カラムに */
+.product-detail-wrapper {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    max-width:none;
+    /* ← 画面全体を使う */
+    margin: 0 auto 40px;
+}
+
+.product-detail-left {
+    flex: 1;
+    /* 画像少し小さめ */
+}
+
+.product-detail-right {
+    flex: 1;
+    /* 情報＋コメント欄を広めに */
+}
+
+/* 画像サイズ調整 */
+.product-main-image {
+    width: 100%;
+    max-height: 500px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.purchase-button-wrapper {
+    margin: 20px 0;
+}
+
+.purchase-button {
+    display: block;
+    width: 100%;
+    background-color: #ff4d4d;
+    color: white;
+    text-align: center;
+    padding: 14px 0;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.purchase-button:hover {
+    background-color: #e04343;
+}
+
+/* 右カラム内の要素を全部ボタンと同じ幅に揃える */
+.product-detail-right>* {
+    display: block;
+    width: 100%;
+}
+
+.comment-textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.comment-list {
+    margin-top: 20px;
+}
+
+.comment-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.comment-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-body {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+.comment-submit-btn{
+    display: block;
+    width: 100%;
+    background-color: #ff4d4d;
+    color: white;
+    text-align: center;
+    padding: 14px 0;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+}

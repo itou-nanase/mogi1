@@ -1,0 +1,63 @@
+body {
+    font-family: sans-serif;
+    background: white;
+    margin: 0;
+}
+
+.header, .footer {
+    background: #000000de;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.header-buttons form {
+    margin: 0;
+}
+
+.logout-btn {
+    background: #000000de;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.main-content {
+    padding: 30px;
+    background-color: white;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* ← 横の間隔 */
+}
+
+/* マイページボタン */
+.mypage-btn {
+    background: #000000de;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.mypage-btn:hover {
+    opacity: 0.8;
+}
+
+.sell-button {
+    background-color: white;
+    color: #000000de;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
