@@ -97,11 +97,48 @@ select {
 
 .preview-image {
     width: 180px;
-    /* ← ここでサイズを固定する */
+        /* ← ここでサイズを固定する */
     height: auto;
     margin-top: 10px;
     border-radius: 6px;
     object-fit: cover;
-    /* ← 画像が変に伸びない */
+        /* ← 画像が変に伸びない */
     border: 1px solid #ddd;
+}
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    position: relative;
+    cursor: pointer;
+}
+
+.tag-input {
+    display: none;
+    /* チェックボックスを非表示 */
+}
+
+.tag-label {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 2px solid #ff4d4d;
+    /* 赤枠 */
+    border-radius: 20px;
+    color: #ff4d4d;
+    /* 赤文字 */
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* ▼ チェックされたときの見た目 */
+.tag-input:checked+.tag-label {
+    background-color: #ff4d4d;
+    /* 赤背景 */
+    color: #fff;
+    /* 白文字 */
 }

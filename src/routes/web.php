@@ -59,7 +59,7 @@ Route::get('/mypage/purchased', [MypageController::class, 'purchased'])->name('m
 
 
 //検索バー
-Route::get('/products/search', [TopController::class, 'search'])->name('products.search');
+Route::get('/search', [TopController::class, 'search'])->name('top.search');
 
 // トップ画面（未認証でも閲覧可）
 Route::get('/', [TopController::class, 'index'])

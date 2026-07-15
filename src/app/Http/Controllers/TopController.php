@@ -16,7 +16,7 @@ class TopController extends Controller
         $products = Product::query()
             ->when($userId, function ($query, $userId) {
             // 自分が出品した商品を除外
-            $query->where('user_id', '!=', $userId);
+            $query->where('seller_id', '!=', $userId);
             })
             ->when($keyword, function ($query, $keyword) {
             // キーワード検索
@@ -54,4 +54,16 @@ class TopController extends Controller
         return view('product_detail', compact('product'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $products = Product::query()
+            ->when($keyword, function ($query, $keyword) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+            })
+            ->get();
+
+        return view('top', compact('products', 'keyword'));
+    }
 }

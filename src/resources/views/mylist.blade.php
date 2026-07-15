@@ -1,17 +1,20 @@
 @extends('layouts.layout')
 
 @section('header-buttons')
-    @auth
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit" class="logout-btn">ログアウト</button>
+    {{-- 検索バー --}}
+    <form method="GET" action="{{ route('top.search') }}">
+    <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="商品名で検索">
+    <button type="submit">検索</button>
     </form>
 
-    <form action="{{ url()->current() }}" method="GET" class="search-form">
-        <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="商品名で検索">
-        <button type="submit">検索</button>
+    {{-- ログアウト --}}
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button class="logout-btn">ログアウト</button>
     </form>
-    @endauth
+
+    {{-- マイページ --}}
+    <a href="{{ route('mypage') }}" class="mypage-btn">マイページ</a>
 @endsection
 
 @section('title', 'マイリスト')

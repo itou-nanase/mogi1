@@ -14,11 +14,11 @@ class AddMissingColumnsToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-        $table->json('categories')->nullable();
-        $table->string('condition')->nullable();
-        $table->string('brand')->nullable();
-        $table->text('description')->nullable();
-        $table->integer('price')->nullable();
+        //$table->json('categories')->nullable();
+        //$table->string('condition')->nullable();
+        //$table->string('brand')->nullable();
+        //$table->text('description')->nullable();
+        //$table->integer('price')->nullable();
         });
     }
 

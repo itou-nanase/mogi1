@@ -2,8 +2,8 @@
 
 @section('header-buttons')
     {{-- 検索バー --}}
-    <form action="{{ route('products.search') }}" method="GET" class="search-form">
-        <input type="text" name="keyword" placeholder="検索" />
+    <form method="GET" action="{{ route('top.search') }}">
+        <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="商品名で検索">
         <button type="submit">検索</button>
     </form>
 

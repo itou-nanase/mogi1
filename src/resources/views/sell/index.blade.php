@@ -28,7 +28,7 @@
     </div>
 
     {{-- ▼ カテゴリ --}}
-    <label>カテゴリ（複数選択可）</label>
+ <label>カテゴリ（複数選択可）</label>
     <div class="category-tags">
         @foreach($categories as $category)
             <label class="tag">
@@ -38,7 +38,8 @@
         @endforeach
     </div>
 
-    {{-- ▼ 商品の状態 --}}
+
+{{-- ▼ 商品の状態 --}}
     <label>商品の状態</label>
     <select name="condition">
         @foreach($conditions as $condition)

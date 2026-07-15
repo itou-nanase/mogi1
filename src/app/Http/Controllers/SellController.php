@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Category;
 
 class SellController extends Controller
 {
@@ -35,7 +36,7 @@ public function store(Request $request)
     Product::create([
         'image_path' => $path,
         'categories' => json_encode($validated['categories']),
-        'condition'  => $validated['condition'],
+        'condition_id'  => $validated['condition'],
         'name'       => $validated['name'],
         'brand'      => $validated['brand'],
         'description'=> $validated['description'],

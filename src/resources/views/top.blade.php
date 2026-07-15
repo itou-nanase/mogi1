@@ -2,8 +2,8 @@
 
 @section('header-buttons')
     {{-- 検索バー --}}
-    <form action="{{ route('products.search') }}" method="GET" class="search-form">
-        <input type="text" name="keyword" placeholder="検索" />
+    <form method="GET" action="{{ route('top.search') }}">
+        <input type="text" name="keyword" value="{{ request('keyword') }}" placeholder="商品名で検索">
         <button type="submit">検索</button>
     </form>
 
@@ -39,7 +39,7 @@
 
 <div class="product-grid">
     @foreach ($products as $product)
-        @if ($product->user_id !== optional(auth()->user())->id)
+        @if ($product->seller_id !== optional(auth()->user())->id)
             <div class="product-card">
                 <div class="image-wrapper">
                     <a href="{{ route('item.show', ['item_id' => $product->id]) }}">

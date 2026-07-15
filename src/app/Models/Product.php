@@ -25,7 +25,7 @@ class Product extends Model
     // 出品者
     public function seller()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'seller_id');
     }
 
     // 購入者
@@ -70,4 +70,5 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
 }
