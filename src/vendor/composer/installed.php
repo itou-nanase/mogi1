@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '7efe8a2b01e09af7dbb86bece67305e16daef134',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -412,15 +412,6 @@
                 0 => '*',
             ),
         ),
-        'laravel-lang/lang' => array(
-            'pretty_version' => '12.17.1',
-            'version' => '12.17.1.0',
-            'reference' => 'b07184103fb64131d514667b8fd1d74c71105409',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../laravel-lang/lang',
-            'aliases' => array(),
-            'dev_requirement' => true,
-        ),
         'laravel/fortify' => array(
             'pretty_version' => 'v1.19.1',
             'version' => '1.19.1.0',
@@ -440,9 +431,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '7efe8a2b01e09af7dbb86bece67305e16daef134',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
