@@ -54,23 +54,16 @@
 # ER図
 ```mermaid
 erDiagram
-    Users ||--o{ Products : "sells"
-    Users ||--o{ Purchases : "buys"
 
-    Products {
-        bigint id PK
-        varchar name
-        varchar brand
-        text description
-        int price
-        int condition
-        bigint seller_id FK
-        bigint buyer_id FK
-        timestamp created_at
-        timestamp updated_at
-    }
+    USERS ||--o{ PRODUCTS : "sells"
+    USERS ||--o{ PURCHASES : "buys"
+    PRODUCTS ||--o{ COMMENTS : "has"
+    PRODUCTS ||--o{ LIKES : "liked by"
+    BRANDS ||--o{ PRODUCTS : "brand"
+    CATEGORIES ||--o{ PRODUCTS : "category"
+    CONDITIONS ||--o{ PRODUCTS : "condition"
 
-    Users {
+    USERS {
         bigint id PK
         varchar name
         varchar email
@@ -79,9 +72,67 @@ erDiagram
         timestamp updated_at
     }
 
-    Purchases {
+    PRODUCTS {
+        bigint id PK
+        varchar name
+        varchar image_path
+        json categories
+        bigint brand_id FK
+        bigint category_id FK
+        bigint condition_id FK
+        text description
+        int price
+        bigint seller_id FK
+        bigint buyer_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    BRANDS {
+        bigint id PK
+        varchar name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CATEGORIES {
+        bigint id PK
+        varchar name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CONDITIONS {
+        bigint id PK
+        varchar label
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PURCHASES {
         bigint id PK
         bigint user_id FK
+        bigint product_id FK
+        timestamp created_at
+    }
+
+    COMMENTS {
+        bigint id PK
+        bigint product_id FK
+        bigint user_id FK
+        text body
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    LIKES {
+        bigint id PK
+        bigint product_id FK
+        bigint user_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
         bigint product_id FK
         timestamp created_at
     }
