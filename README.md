@@ -33,7 +33,7 @@
 
 # 環境構築
 - git clone git@github.com:itou-nanase/mogi1.git
-- cd coachtech-fleamarket
+- cd coachtech/laravel/mogi1
 - docker compose up -d --build
 - docker compose exec php bash
 - cd src
