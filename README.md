@@ -57,8 +57,6 @@ erDiagram
 
     USERS ||--o{ PRODUCTS : "sells"
     USERS ||--o{ PURCHASES : "buys"
-    PRODUCTS ||--o{ COMMENTS : "has"
-    PRODUCTS ||--o{ LIKES : "liked by"
     BRANDS ||--o{ PRODUCTS : "brand"
     CATEGORIES ||--o{ PRODUCTS : "category"
     CONDITIONS ||--o{ PRODUCTS : "condition"
@@ -112,27 +110,6 @@ erDiagram
     PURCHASES {
         bigint id PK
         bigint user_id FK
-        bigint product_id FK
-        timestamp created_at
-    }
-
-    COMMENTS {
-        bigint id PK
-        bigint product_id FK
-        bigint user_id FK
-        text body
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    LIKES {
-        bigint id PK
-        bigint product_id FK
-        bigint user_id FK
-        timestamp created_at
-        timestamp updated_at
-    }
-
         bigint product_id FK
         timestamp created_at
     }
