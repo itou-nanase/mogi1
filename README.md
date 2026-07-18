@@ -39,6 +39,14 @@
 - cd src
 - composer install
 - cp .env.example .env
+- Docker の MySQL に接続するため、以下の値を .env に設定してください。
+  DB_CONNECTION=mysql
+  DB_HOST=mysql
+  DB_PORT=3306
+  DB_DATABASE=laravel_db
+  DB_USERNAME=laravel_user
+  DB_PASSWORD=laravel_pass
+  設定後、アプリキーを生成します。
 - php artisan key:generate
 - php artisan migrate --seed
 - php artisan storage:link
