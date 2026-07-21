@@ -33,12 +33,20 @@
 
 # 環境構築
 - git clone git@github.com:itou-nanase/mogi1.git
-- cd coachtech-fleamarket
+- cd coachtech/laravel/mogi1
 - docker compose up -d --build
 - docker compose exec php bash
 - cd src
 - composer install
 - cp .env.example .env
+- Docker の MySQL に接続するため、以下の値を .env に設定してください。
+  DB_CONNECTION=mysql
+  DB_HOST=mysql
+  DB_PORT=3306
+  DB_DATABASE=laravel_db
+  DB_USERNAME=laravel_user
+  DB_PASSWORD=laravel_pass
+  設定後、アプリキーを生成します。
 - php artisan key:generate
 - php artisan migrate --seed
 - php artisan storage:link
@@ -46,23 +54,14 @@
 # ER図
 ```mermaid
 erDiagram
-    Users ||--o{ Products : "sells"
-    Users ||--o{ Purchases : "buys"
 
-    Products {
-        bigint id PK
-        varchar name
-        varchar brand
-        text description
-        int price
-        int condition
-        bigint seller_id FK
-        bigint buyer_id FK
-        timestamp created_at
-        timestamp updated_at
-    }
+    USERS ||--o{ PRODUCTS : "sells"
+    USERS ||--o{ PURCHASES : "buys"
+    BRANDS ||--o{ PRODUCTS : "brand"
+    CATEGORIES ||--o{ PRODUCTS : "category"
+    CONDITIONS ||--o{ PRODUCTS : "condition"
 
-    Users {
+    USERS {
         bigint id PK
         varchar name
         varchar email
@@ -71,7 +70,44 @@ erDiagram
         timestamp updated_at
     }
 
-    Purchases {
+    PRODUCTS {
+        bigint id PK
+        varchar name
+        varchar image_path
+        json categories
+        bigint brand_id FK
+        bigint category_id FK
+        bigint condition_id FK
+        text description
+        int price
+        bigint seller_id FK
+        bigint buyer_id FK
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    BRANDS {
+        bigint id PK
+        varchar name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CATEGORIES {
+        bigint id PK
+        varchar name
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CONDITIONS {
+        bigint id PK
+        varchar label
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PURCHASES {
         bigint id PK
         bigint user_id FK
         bigint product_id FK
