@@ -18,3 +18,4 @@ yarn-error.log
 docker/mysql/data/
 docker/mysql/logs/
 docker/mysql/conf.d/
+

@@ -9,17 +9,18 @@ class Product extends Model
 {
     use HasFactory;
 
-        protected $fillable = [
+    protected $fillable = [
         'seller_id',
         'name',
         'image_path',
-        'categories',
-        'condition',
-        'brand',
+        'categories',      // JSON
+        'brand_id',        // 外部キー
+        'category_id',     // 外部キー
+        'condition_id',    // 外部キー
         'description',
         'price',
         'buyer_id',
-        'address', 
+        'address',
     ];
 
     // 出品者
@@ -29,17 +30,18 @@ class Product extends Model
     }
 
     // 購入者
-        public function buyer()
+    public function buyer()
     {
         return $this->belongsTo(User::class, 'buyer_id');
     }
 
-    // 購入済み判定
+    // SOLD 判定
     public function getIsSoldAttribute()
     {
         return !is_null($this->buyer_id);
     }
-    //マイリスト
+
+    // いいね
     public function likes()
     {
         return $this->hasMany(Like::class);
@@ -50,25 +52,27 @@ class Product extends Model
         return $this->likes()->where('user_id', $user->id)->exists();
     }
 
-    //商品詳細
+    // ブランド
     public function brand()
     {
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Brand::class, 'brand_id');
     }
 
+    // カテゴリ
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'category_id');
     }
 
+    // コンディション
     public function condition()
     {
-        return $this->belongsTo(Condition::class);
+        return $this->belongsTo(Condition::class, 'condition_id');
     }
 
+    // コメント
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
-
 }

@@ -23,10 +23,24 @@ public function up()
         'categories_json' => DB::raw('categories')
     ]);
 
-    // 古いカラムを削除して、新しいカラム名を戻す
+    // 古いカラムを削除
     Schema::table('products', function (Blueprint $table) {
         $table->dropColumn('categories');
-        $table->renameColumn('categories_json', 'categories');
+    });
+
+    // 新しいカラム名を追加（renameColumn を使わない）
+    Schema::table('products', function (Blueprint $table) {
+        $table->json('categories')->nullable();
+    });
+
+    // コピーした値を戻す
+    DB::table('products')->update([
+        'categories' => DB::raw('categories_json')
+    ]);
+
+    // 一時カラムを削除
+    Schema::table('products', function (Blueprint $table) {
+        $table->dropColumn('categories_json');
     });
 }
 
@@ -36,5 +50,5 @@ public function down()
         $table->string('categories')->nullable();
     });
 }
-
 }
+

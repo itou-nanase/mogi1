@@ -7,18 +7,15 @@ use App\Models\User;
 
 class ProductSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
+        // 出品者を作成
         $user = User::factory()->create([
             'email' => 'phoebe.hessel@example.net',
             'password' => bcrypt('password'),
         ]);
 
+        // ランダム出品者用に複数ユーザー作成
         $users = User::factory()->count(3)->create();
 
         // ダミー商品データ
@@ -35,13 +32,13 @@ class ProductSeeder extends Seeder
             ['name' => 'メイクセット', 'image_path'=>'products/makeup.jpg','price' =>2500],            
         ];
 
-        foreach ($items as $index => $item) {
+        foreach ($items as $item) {
             Product::create([
-                'name'      => $item['name'],
-                'image_path'=> $item['image_path'],
-                'price'     => $item['price'], 
-                'user_id'   => $users->random()->id, // ランダム出品者
-                'buyer_id'  =>null,//常に未購入
+                'name'       => $item['name'],
+                'image_path' => $item['image_path'],
+                'price'      => $item['price'], 
+                'seller_id'  => $users->random()->id,   // ← user_id → seller_id に変更
+                'buyer_id'   => null,                   // 未購入
             ]);
         }
     }

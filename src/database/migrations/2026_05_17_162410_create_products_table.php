@@ -17,16 +17,12 @@ class CreateProductsTable extends Migration
         $table->id();
         $table->string('name');
         $table->string('image_path')->nullable(); // ← これ1つだけ
-        $table->string('brand')->nullable();
-        $table->unsignedBigInteger('user_id');
         $table->unsignedBigInteger('buyer_id')->nullable();
         $table->unsignedBigInteger('brand_id')->nullable();
         $table->unsignedBigInteger('category_id')->nullable();
         $table->unsignedBigInteger('condition_id')->nullable();
         $table->integer('price');
         $table->text('description')->nullable();
-        $table->json('categories');
-        $table->string('condition');
         $table->unsignedBigInteger('seller_id');
         $table->timestamps();
 });
