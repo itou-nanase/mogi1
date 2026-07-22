@@ -36,7 +36,6 @@
 - cd coachtech/laravel/mogi1
 - docker compose up -d --build
 - docker compose exec php bash
-- cd src
 - composer install
 - cp .env.example .env
 - Docker の MySQL に接続するため、以下の値を .env に設定してください。
