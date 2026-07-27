@@ -38,12 +38,36 @@
 </div>
 
 <div class="product-grid">
-    @foreach ($products as $product)
-        @if ($product->seller_id !== optional(auth()->user())->id)
+
+    {{-- おすすめタブ --}}
+    @if (request()->routeIs('top'))
+        @foreach ($recommendedProducts as $product)
+            @if ($product->seller_id !== optional(auth()->user())->id)
+                <div class="product-card">
+                    <div class="image-wrapper">
+                        <a href="{{ route('item.show', ['item_id' => $product->id]) }}">
+                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
+
+                            @if ($product->is_sold)
+                                <span class="sold-badge">SOLD</span>
+                            @endif
+
+                            <p>{{ $product->name }}</p>
+                        </a>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    @endif
+
+
+    {{-- マイリストタブ --}}
+    @if (request()->routeIs('mylist'))
+        @foreach ($likedProducts as $product)
             <div class="product-card">
                 <div class="image-wrapper">
                     <a href="{{ route('item.show', ['item_id' => $product->id]) }}">
-                        <img src="{{  asset('storage/' . $product->image_path)}}" alt="{{ $product->name }}">
+                        <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}">
 
                         @if ($product->is_sold)
                             <span class="sold-badge">SOLD</span>
@@ -51,13 +75,11 @@
 
                         <p>{{ $product->name }}</p>
                     </a>
-                    @if ($product->is_sold)
-                        <span class="sold-badge">SOLD</span>
-                    @endif
                 </div>
             </div>
-        @endif
-    @endforeach
+        @endforeach
+    @endif
+
 </div>
 
 @endsection

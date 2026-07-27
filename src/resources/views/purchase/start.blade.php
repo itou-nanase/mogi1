@@ -76,3 +76,20 @@
 </div>
 
 @endsection
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const select = document.querySelector('.payment-select');
+    const display = document.getElementById('selected-payment');
+
+    select.addEventListener('change', function () {
+        if (this.value === 'convenience') {
+            display.textContent = 'コンビニ払い';
+        } else if (this.value === 'card') {
+            display.textContent = 'カード払い';
+        }
+    });
+});
+</script>
+
+

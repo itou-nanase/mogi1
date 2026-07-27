@@ -13,9 +13,7 @@ class Product extends Model
         'seller_id',
         'name',
         'image_path',
-        'categories',      // JSON
         'brand_id',        // 外部キー
-        'category_id',     // 外部キー
         'condition_id',    // 外部キー
         'description',
         'price',
@@ -59,10 +57,11 @@ class Product extends Model
     }
 
     // カテゴリ
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsToMany(Category::class, 'product_category');
     }
+
 
     // コンディション
     public function condition()

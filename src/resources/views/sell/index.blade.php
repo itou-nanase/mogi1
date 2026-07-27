@@ -28,22 +28,22 @@
     </div>
 
     {{-- ▼ カテゴリ --}}
- <label>カテゴリ（複数選択可）</label>
-    <div class="category-tags">
+    <label>カテゴリ（複数選択可）</label>
+        <div class="category-tags">
         @foreach($categories as $category)
             <label class="tag">
-                <input type="checkbox" name="categories[]" value="{{ $category }}" class="tag-input">
-                <span class="tag-label">{{ $category }}</span>
+                <input type="checkbox" name="categories[]" value="{{ $category ->id}}" class="tag-input">
+                <span class="tag-label">{{ $category ->name}}</span>
             </label>
         @endforeach
-    </div>
+        </div>
 
 
 {{-- ▼ 商品の状態 --}}
     <label>商品の状態</label>
     <select name="condition">
         @foreach($conditions as $condition)
-            <option value="{{ $condition }}">{{ $condition }}</option>
+            <option value="{{ $condition ->id}}">{{ $condition ->label}}</option>
         @endforeach
     </select>
 

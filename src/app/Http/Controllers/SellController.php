@@ -5,71 +5,51 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Brand;
+use App\Models\Condition;
+use App\Http\Requests\ExhibitionRequest;
 
 class SellController extends Controller
 {
     public function index()
     {
         return view('sell.index', [
-            'categories' => self::CATEGORIES,
-            'conditions' => self::CONDITIONS,
+            'categories' => Category::all(),
+            'conditions' => Condition::all(),
         ]);
     }
 
-public function store(Request $request)
-{
-    // バリデーション（結果を $validated に入れる）
-    $validated = $request->validate([
-        'product_image' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-        'categories'    => 'required|array',
-        'condition'     => 'required|string',
-        'name'          => 'required|string|max:255',
-        'brand'         => 'nullable|string|max:255',
-        'description'   => 'required|string',
-        'price'         => 'required|integer|min:1',
-    ]);
+    public function store(ExhibitionRequest $request)
+    {
+        // バリデーション済み
+        $validated = $request->validated();
 
-    // 画像保存
-    $path = $request->file('product_image')->store('products', 'public');
+        // 画像保存
+        $path = $request->file('product_image')->store('products', 'public');
 
-    // DB 保存
-    Product::create([
-        'image_path' => $path,
-        'categories' => json_encode($validated['categories']),
-        'condition_id'  => $validated['condition'],
-        'name'       => $validated['name'],
-        'brand'      => $validated['brand'],
-        'description'=> $validated['description'],
-        'price'      => $validated['price'],
-        'seller_id'  => auth()->id(),
-    ]);
+        // ブランド名 → brand_id を作成または取得
+        $brandId = null;
+        if (!empty($validated['brand'])) {
+            $brandId = Brand::firstOrCreate([
+                'name' => $validated['brand'],
+            ])->id;
+        }
 
-    return redirect()->route('mypage', ['page' => 'sell']);
+        // 商品作成（カテゴリは後で attach）
+        $product = Product::create([
+            'image_path'   => $path,
+            'condition_id' => $validated['condition'],
+            'name'         => $validated['name'],
+            'brand_id'     => $brandId,
+            'description'  => $validated['description'],
+            'price'        => $validated['price'],
+            'seller_id'    => auth()->id(),
+        ]);
+
+        // カテゴリ複数選択
+        // $validated['categories'] は配列（例: [1,3,5]）
+        $product->categories()->attach($validated['categories']);
+
+        return redirect()->route('mypage', ['page' => 'sell']);
+    }
 }
-
-        public const CATEGORIES = [
-            'ファッション',
-            '家電',
-            'インテリア',
-            'レディース',
-            'メンズ',
-            'コスメ',
-            '本',
-            'ゲーム',
-            'スポーツ',
-            'キッチン',
-            'ハンドメイド',
-            'アクセサリー',
-            'おもちゃ',
-            'ベビー・キッズ',
-        ];
-
-        public const CONDITIONS = [
-            '良好',
-            '目立った傷や汚れなし',
-            'やや傷や汚れあり',
-            '状態が悪い',
-    ];
-}
-
-

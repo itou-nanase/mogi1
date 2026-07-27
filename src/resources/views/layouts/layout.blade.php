@@ -5,7 +5,7 @@
     <title>@yield('title')</title>
 
     {{-- 共通CSS --}}
-    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/common.css?v=1">
 
     {{-- ページごとのCSS --}}
     @yield('css')

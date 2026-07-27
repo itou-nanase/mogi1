@@ -13,7 +13,7 @@ class TopController extends Controller
         $userId = Auth::id();
         $keyword = $request->input('keyword');
 
-        $products = Product::query()
+        $recommendedProducts = Product::query()
             ->when($userId, function ($query, $userId) {
             // 自分が出品した商品を除外
             $query->where('seller_id', '!=', $userId);
@@ -24,8 +24,11 @@ class TopController extends Controller
             })
             ->with('buyer')
             ->get();
+        
+        // ★ ここで空の likedProducts を渡しておく
+        $likedProducts = collect();
 
-        return view('top', compact('products', 'keyword'));
+        return view('top', compact('recommendedProducts', 'likedProducts','keyword'));
     }
 
 
@@ -34,16 +37,19 @@ class TopController extends Controller
         $user = auth()->user();
 
         // ユーザーが「いいね」した商品だけ取得
-        $products = $user->likes()->with('product')->get()->pluck('product');
+        $likedProducts = $user->likes()->with('product')->get()->pluck('product');
 
-        return view('top', compact('products'));
+        // ★ おすすめ用の空データ
+        $recommendedProducts = collect();
+
+        return view('top', compact('likedProducts', 'recommendedProducts'));
     }
 
     public function show($item_id)
     {
        $product = Product::with([
         'brand',
-        'category',
+        'categories',
         'condition',
         'comments.user',
         'likes'
@@ -58,12 +64,15 @@ class TopController extends Controller
     {
         $keyword = $request->input('keyword');
 
-        $products = Product::query()
+        $recommendedProducts = Product::query()
             ->when($keyword, function ($query, $keyword) {
             $query->where('name', 'like', '%' . $keyword . '%');
             })
             ->get();
 
-        return view('top', compact('products', 'keyword'));
+        // ★ マイリスト用の空データ
+        $likedProducts = collect();
+
+        return view('top', compact('recommendedProducts', 'likedProducts', 'keyword'));
     }
 }

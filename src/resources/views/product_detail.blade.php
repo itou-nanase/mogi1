@@ -79,8 +79,12 @@
         <div class="product-info">
             <h2>商品情報</h2>
             <ul>
-                <li>カテゴリ：{{ $product->category->name ?? '未設定' }}</li>
+                <li>カテゴリ：@foreach($product->categories as $category)
+                    <span>{{$category->name}}</span>
+                @endforeach
+                </li>
                 <li>商品の状態：{{ $product->condition->label ?? '未設定' }}</li>
+                <li>ブランド：{{$product->brand->name ??'なし'}}
             </ul>
         </div>
 

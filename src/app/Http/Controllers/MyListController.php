@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Like;
 
-
 class MyListController extends Controller
 {
     public function index(Request $request)
@@ -20,8 +19,12 @@ class MyListController extends Controller
             });
         }
 
-        $products = $query->get()->pluck('product');
+        // ★ ここを products → likedProducts に変更
+        $likedProducts = $query->get()->pluck('product');
 
-        return view('products.mylist', compact('products'));
+        // ★ おすすめ用の空データも渡す（top.blade が参照するため）
+        $recommendedProducts = collect();
+
+        return view('top', compact('likedProducts', 'recommendedProducts'));
     }
 }

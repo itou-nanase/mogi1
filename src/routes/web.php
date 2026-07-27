@@ -51,13 +51,6 @@ Route::get('/mypage/profile', [MypageController::class, 'edit'])
 Route::post('/mypage/profile/update', [MypageController::class, 'update'])
     ->name('mypage.update');
 
-// 出品した商品一覧
-Route::get('/mypage/sell', [MypageController::class, 'selling'])->name('mypage.selling');
-
-// 購入した商品一覧
-Route::get('/mypage/purchased', [MypageController::class, 'purchased'])->name('mypage.purchased');
-
-
 //検索バー
 Route::get('/search', [TopController::class, 'search'])->name('top.search');
 
