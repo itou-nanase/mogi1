@@ -22,6 +22,7 @@
 
     <form method="POST" action="{{ route('mypage.update') }}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
         {{-- プロフィール画像 --}}
         <div class="profile-container">
@@ -40,7 +41,7 @@
 
         {{-- ユーザー名 --}}
         <label for="username">ユーザー名</label>
-        <input id="username" type="text" name="username" value="{{ old('username', $user->username) }}">
+        <input id="username" type="text" name="name" value="{{ old('name', $user->name) }}">
 
         {{-- 郵便番号 --}}
         <label for="postal_code">郵便番号</label>

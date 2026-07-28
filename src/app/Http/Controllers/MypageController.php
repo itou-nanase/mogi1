@@ -12,10 +12,6 @@ public function index(Request $request)
     $user = auth()->user();
     $page = $request->query('page', 'profile');
 
-    if ($user->is_first_login) {
-        return redirect()->route('mypage.profile.first');
-    }
-
     // ▼ 商品一覧の取得だけ行う（return しない）
     if ($page === 'sell') {
         $products = Product::where('seller_id', $user->id)->latest()->get();
@@ -37,16 +33,15 @@ public function edit()
 }
 
 public function update(Request $request)
-{
+ {
     $user = auth()->user();
 
     // プロフィール更新処理（画像や名前の更新など）
     // ここはあなたの処理のままでOK
 
     // ★ 初回ログインフラグをオフにする
-    if ($user->is_first_login) {
-        $user->is_first_login = false;
-        $user->save();
+    if ($user->first_login) {
+        $user->first_login = false;
     }
 
     $user->save();

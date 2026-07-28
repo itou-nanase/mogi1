@@ -28,8 +28,18 @@ class FortifyServiceProvider extends ServiceProvider
             \Laravel\Fortify\Contracts\LoginResponse::class,
             \App\Http\Responses\LoginResponse::class
         );
-    }
 
+        // 追加：会員登録後のリダイレクト先をプロフィール設定画面に変更
+        $this->app->singleton       (RegisterResponse::class, function () {
+            return new class implements RegisterResponse {
+                public function toResponse($request)
+                {
+                // プロフィール設定画面のルート名またはURLを指定
+                return redirect()->route('mypage.profile.first'); 
+                }
+            };
+        });
+    }
     /**
      * Bootstrap any application services.
      */
