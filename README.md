@@ -21,6 +21,7 @@
 -Stripe Checkout によるカード決済
 -決済成功 / キャンセル画面の遷移
 -決済後の購入処理（buyer_id 更新など）
+-なお、カード決済がメインのため、コンビニ払いを選択すると処理はできません。
 
 # 使用技術
 - PHP 8.x
@@ -33,7 +34,7 @@
 
 # 環境構築
 - git clone git@github.com:itou-nanase/mogi1.git
-- cd coachtech/laravel/mogi1
+- cd mogi1
 - docker compose up -d --build
 - docker compose exec php bash
 - composer install
